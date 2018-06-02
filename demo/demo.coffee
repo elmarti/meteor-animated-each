@@ -1,5 +1,5 @@
 @Stuff = new Meteor.Collection("stuff")
-Meteor.startup = ()->
+Meteor.startup = ->
   AnimatedEach.setConfig({
     durationIn: 'fast',
     durationOut: 'slow'
