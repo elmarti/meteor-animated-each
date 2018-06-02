@@ -1,3 +1,7 @@
+## v0.2.1
+
+* Add configurable durationIn and durationOut values
+
 ## v0.2.0
 
 * Use the [Transit](http://ricostacruz.com/jquery.transit/) jQuery library for CSS transitions, which are smoother and less CPU-intensive than jQuery's standard animations.

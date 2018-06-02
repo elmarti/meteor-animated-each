@@ -1,24 +1,37 @@
 class AnimatedEach
 
+
+  @config = {
+    durationIn: "slow",
+    durationOut: "slow"
+  }
   _getScrollParent = (scrollParent, node) ->
     return $(scrollParent) if scrollParent?
     return $(node).scrollParent() if jQuery.fn.scrollParent?
     Meteor._debug("Could not find scroll parent; assuming body for ", node)
     return $("body")
-
+    
+    
+    
+  ###
+    config: at present, only sets the duration value
+  ###
+  @setConfig: (config) ->
+    @config = Object.assign({}, @config, config)
   ###
     container: the node that will contain the #each elements as children
     scrollParent: (optional) the element that this container scrolls within
   ###
   @attachHooks: (container, scrollParent) ->
     # See reference implementation at packages/ui/domrange.js
+    hooksConfig = @config
     container._uihooks =
       insertElement: (node, next) ->
         # Make the node invisible before fading in
         $(node).css("opacity", 0)
         container.insertBefore(node, next)
 
-        $(node).transition {opacity: 1}, "slow", "in", ->
+        $(node).transition {opacity: 1}, hooksConfig.durationIn, "in", ->
           $(this).css("opacity", "")
 
         $sp = _getScrollParent(scrollParent, node)
@@ -54,7 +67,7 @@ class AnimatedEach
 
         # Fade out the node, and when completed remove it and adjust the
         # scroll height
-        $(node).transition {opacity: 0}, "slow", "out", ->
+        $(node).transition {opacity: 0}, hooksConfig.durationOut, "out", ->
           $(this).remove() # equiv to parent.removeChild(node) or $node.remove()
 
           # Adjust scroll position around the removed element, if it was above

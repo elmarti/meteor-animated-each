@@ -1,5 +1,9 @@
 @Stuff = new Meteor.Collection("stuff")
-
+Meteor.startup = ()->
+  AnimatedEach.setConfig({
+    durationIn: 'fast',
+    durationOut: 'slow'
+  })
 if Meteor.isClient
   Template.list.events
     "submit form": (e, t) ->

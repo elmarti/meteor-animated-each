@@ -41,3 +41,14 @@ Template.foo.rendered = function() {
 ```
 
 The second argument `scrollParent` should be a selector for the element that this content scrolls within. If you are using jQuery UI (such as with the [meteor-jqueryui](https://github.com/mizzao/meteor-jqueryui) package), the scroll parent will be computed automatically and you can omit this argument.
+
+Configuring animation duration: 
+
+Animations can be set using a config value:
+
+```
+AnimatedEach.setConfig({
+    durationIn: "fast",
+    durationOut: "slow"
+});
+```
